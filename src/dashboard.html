@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+</head>
+
+<body>
+
+  <div class="container js-dashboard-not-logged-in d-none">
+    <div class="row">
+      <div class="col-12">
+        <h1>You're not supposed to be here...</h1>
+        <p>
+          Go back to the <a href="/">login</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container js-dashboard-logged-in d-none">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-1 js-dashboard-headline"></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <form class="js-logout-form">
+          <button type="submit" class="btn btn-primary js-submit-button">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

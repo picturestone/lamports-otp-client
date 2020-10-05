@@ -1,5 +1,6 @@
 import hash from './hasher';
 import config from './config';
+import storage from './storage';
 import $ from 'jquery';
 import { formToJson, displayError, displaySuccess } from './helper';
 
@@ -21,8 +22,10 @@ export default class login {
 
         this.login(
             (success) => {
-                displaySuccess('Login successful!', this.$loginForm);
-                this.$submitButton.prop('disabled', false);
+                displaySuccess('Login successful! Redirecting...', this.$loginForm);
+                setTimeout(() => {
+                    window.location.href = '/dashboard.html';
+                }, 2000);
             },
             (error) => {
                 displayError(error.statusText, this.$loginForm);
@@ -57,6 +60,9 @@ export default class login {
                     data: JSON.stringify(loginData),
                     contentType: 'application/json',
                     success: (data) => {
+                        // Login successful
+                        new storage().isLoggedIn = true;
+                        new storage().username = loginData.username;
                         successCallback(data);
                     },
                     error: (error) => {
