@@ -2,7 +2,8 @@ import hash from './hasher';
 import config from './config';
 import storage from './storage';
 import $ from 'jquery';
-import { formToJson, displayError, displaySuccess } from './helper';
+import { formToJson } from './helper';
+import { displayError, displaySuccess } from './alerts';
 
 export default class login {
     constructor() {
