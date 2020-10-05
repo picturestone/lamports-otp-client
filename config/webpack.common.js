@@ -58,10 +58,17 @@ module.exports = {
      * Generates an HTML file from a template.
      */
     new HtmlWebpackPlugin({
-      title: 'Webpack Boilerplate',
+      title: 'Login',
       favicon: paths.static + '/favicon.png',
-      template: paths.src + '/template.html', // template file
+      template: paths.src + '/index.html', // template file
       filename: 'index.html', // output file
+    }),
+
+    new HtmlWebpackPlugin({
+      title: 'Register',
+      favicon: paths.static + '/favicon.png',
+      template: paths.src + '/register.html', // template file
+      filename: 'register.html', // output file
     }),
   ],
 
