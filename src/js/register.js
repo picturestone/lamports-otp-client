@@ -1,5 +1,5 @@
 import hash from './hasher';
-import config from './config';
+import configurator from './configurator';
 import $ from 'jquery';
 import { formToJson } from './helper';
 import { displayError, displaySuccess } from './alerts';
@@ -8,6 +8,7 @@ export default class register {
     constructor() {
         this.$registerForm = $('.js-register-form');
         this.$submitButton = this.$registerForm.find('.js-submit-button');
+        this.configurator = new configurator();
 
         this.bindListeners();
     }
@@ -33,7 +34,7 @@ export default class register {
     }
 
     register(successCallback, errorCallback) {
-        const indexUrl = new config().serverUrl + 'auth/index';
+        const indexUrl = this.configurator.serverUrl + 'auth/index';
 
         // Get number of hash loops necessary.
         $.ajax({
@@ -41,7 +42,7 @@ export default class register {
             url: indexUrl,
             success: (data) => {
                 // Loop password through hash method
-                const registerUrl = new config().serverUrl + 'users';
+                const registerUrl = this.configurator.serverUrl + 'users';
                 const registerData = formToJson(this.$registerForm);
                 if(registerData.password !== '') {
                     registerData.password = hash(registerData.password, data.index);

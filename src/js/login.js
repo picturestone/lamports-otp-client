@@ -1,5 +1,5 @@
 import hash from './hasher';
-import config from './config';
+import configurator from './configurator';
 import storage from './storage';
 import $ from 'jquery';
 import { formToJson } from './helper';
@@ -9,6 +9,8 @@ export default class login {
     constructor() {
         this.$loginForm = $('.js-login-form');
         this.$submitButton = this.$loginForm.find('.js-submit-button');
+        this.storage = new storage();
+        this.configurator = new configurator();
 
         this.bindListeners();
     }
@@ -36,7 +38,7 @@ export default class login {
     }
 
     login(successCallback, errorCallback) {
-        const indexUrl = new config().serverUrl + 'auth/index';
+        const indexUrl = this.configurator.serverUrl + 'auth/index';
         const indexData = formToJson(this.$loginForm);
         delete indexData.password;
 
@@ -48,7 +50,7 @@ export default class login {
             contentType: 'application/json',
             success: (data) => {
                 // Loop password through hash method
-                const loginUrl = new config().serverUrl + 'auth/login';
+                const loginUrl = this.configurator.serverUrl + 'auth/login';
                 const loginData = formToJson(this.$loginForm);
                 if(loginData.password !== '') {
                     loginData.password = hash(loginData.password, data.index);
@@ -62,8 +64,8 @@ export default class login {
                     contentType: 'application/json',
                     success: (data) => {
                         // Login successful
-                        new storage().isLoggedIn = true;
-                        new storage().username = loginData.username;
+                        this.storage.isLoggedIn = true;
+                        this.storage.username = loginData.username;
                         successCallback(data);
                     },
                     error: (error) => {
