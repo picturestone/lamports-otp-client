@@ -1,5 +1,5 @@
 import hash from './hasher';
-import config from './config';
+import configurator from './configurator';
 import storage from './storage';
 import $ from 'jquery';
 import { formToJson } from './helper';
@@ -10,6 +10,7 @@ export default class login {
         this.storage = new storage();
         this.$notLoggedInView = $('.js-dashboard-not-logged-in');
         this.$loggedInView = $('.js-dashboard-logged-in');
+        this.configurator = new configurator();
 
         if(this.storage.isLoggedIn) {
             this.showLoggedInView();
@@ -56,7 +57,7 @@ export default class login {
     }
 
     changePassword(successCallback, errorCallback) {
-        const indexUrl = new config().serverUrl + 'auth/index';
+        const indexUrl = this.configurator.serverUrl + 'auth/index';
 
         // Get number of hash loops necessary.
         $.ajax({
@@ -64,7 +65,7 @@ export default class login {
             url: indexUrl,
             success: (data) => {
                 // Loop password through hash method
-                const changePasswordUrl = new config().serverUrl + 'users';
+                const changePasswordUrl = this.configurator.serverUrl + 'users';
                 const changePasswordData = formToJson(this.$changePasswordForm);
                 if(changePasswordData.password !== '') {
                     changePasswordData.password = hash(changePasswordData.password, data.index);
@@ -94,7 +95,7 @@ export default class login {
         event.preventDefault();
         this.$logoutButton.prop('disabled', true);
 
-        const indexUrl = new config().serverUrl + 'auth/index';
+        const indexUrl = this.configurator.serverUrl + 'auth/index';
         const indexData = { 'username' : this.storage.username };
 
         // Get number of hash loops necessary.
@@ -132,7 +133,7 @@ export default class login {
     }
 
     logout(successCallback, errorCallback) {
-        const logoutUrl = new config().serverUrl + 'auth/logout';
+        const logoutUrl = this.configurator.serverUrl + 'auth/logout';
 
         // Get number of hash loops necessary.
         $.ajax({

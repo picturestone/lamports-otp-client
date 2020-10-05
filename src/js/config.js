@@ -1,5 +1,4 @@
-export default class config {
-    get serverUrl() {
-        return "http://localhost:3000/"
-    }
-};
+export default {
+    'PORT': '3000',
+    'HOST': 'localhost'
+}
