@@ -70,6 +70,13 @@ module.exports = {
       template: paths.src + '/register.html', // template file
       filename: 'register.html', // output file
     }),
+
+    new HtmlWebpackPlugin({
+      title: 'Dashboard',
+      favicon: paths.static + '/favicon.png',
+      template: paths.src + '/dashboard.html', // template file
+      filename: 'dashboard.html', // output file
+    }),
   ],
 
   /**
