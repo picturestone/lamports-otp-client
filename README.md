@@ -8,9 +8,9 @@ This client is made to work with the lamports-otp server found in the [lamports-
 
 The following are prerequisits for running this website.
 
-*git, downloadable [here](https://git-scm.com/downloads)
-*node, downloadable [here](https://nodejs.org/en/download)
-*a browser, for example firefox or google chrome
+* git, downloadable [here](https://git-scm.com/downloads)
+* node, downloadable [here](https://nodejs.org/en/download)
+* a browser, for example firefox or google chrome
 
 ### Setup
 
